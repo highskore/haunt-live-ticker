@@ -1,0 +1,21 @@
+[plugin]
+id = "dev.haunt.live-ticker"
+name = "Live ticker"
+description = "A live ticker of each agent's tool calls on its Haunt row"
+version = "0.1.0"
+api = "0.5"
+entry = "target/wasm32-wasip2/release/haunt_plugin.wasm"
+license = "MIT"
+
+[capabilities]
+events = ["agent.prompt", "agent.tool", "agent.stop", "agent.unknown"]
+decorate = true
+# File paths and commands name each step.
+event_details = true
+
+[settings]
+steps = { type = "integer", default = 6, description = "Tool calls kept on the line, 1 to 12" }
+scroll = { type = "bool", default = true, description = "Scroll the line slowly when it doesn't fit" }
+keep_after_stop = { type = "bool", default = false, description = "Keep the last calls on the row after the turn ends" }
+subagents = { type = "bool", default = false, description = "Include subagents' calls" }
+unverified = { type = "bool", default = false, description = "Also show events without the tab's nonce, which anything in the terminal can forge" }
